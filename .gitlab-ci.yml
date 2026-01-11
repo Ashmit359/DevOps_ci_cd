@@ -1,23 +1,18 @@
 stages:
-  - build_stage
-  - deploy_stage
+  - build
+  - deploy
 
 build:
-  stage: build_stage
-  image: node
+  stage: build
+  image: node:18
   script:
-#    - apt update -y
-#    - apt install npm -y
-    - npm install
-  artifacts:
+    - npm ci
+  cache:
     paths:
-      - node_modules
-      - package-lock.json
+      - node_modules/
 
 deploy:
-  stage: deploy_stage
-  image: node
+  stage: deploy
+  image: node:18
   script:
-#   - apt update -y
-#    - apt install nodejs -y
-    - node app.js > /dev/null 2>&1 &
+    - echo "Deployment step goes here"
